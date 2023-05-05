@@ -16,7 +16,7 @@ import java.io.File;
 import static org.hamcrest.Matchers.is;
 
 public abstract class BaseTest {
-    protected static ResponseSpecification getResponseSpec(String city){
+    protected static ResponseSpecification getResponseSpec(String city) {
         return new ResponseSpecBuilder()
                 .expectContentType(ContentType.JSON)
                 .expectStatusCode(200)
@@ -24,7 +24,8 @@ public abstract class BaseTest {
                 .expectBody(System.getProperty("nameParam"), is(city))
                 .build();
     }
-    protected static RequestSpecification getRequestSpecByCityName(String city){
+
+    protected static RequestSpecification getRequestSpecByCityName(String city) {
         return new RequestSpecBuilder()
                 .setBaseUri(getBaseUrl())
                 .addQueryParam(System.getProperty("cityParam"), city)
@@ -32,7 +33,8 @@ public abstract class BaseTest {
                 .setContentType(ContentType.JSON)
                 .build();
     }
-    protected static RequestSpecification getRequestSpecByCityId(int id){
+
+    protected static RequestSpecification getRequestSpecByCityId(int id) {
         return new RequestSpecBuilder()
                 .setBaseUri(getBaseUrl())
                 .addQueryParam(System.getProperty("idParam"), id)
@@ -40,18 +42,22 @@ public abstract class BaseTest {
                 .setContentType(ContentType.JSON)
                 .build();
     }
+
     @BeforeAll
     public static void setup() {
         new YamlReader();
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
     }
-    private static String getBaseUrl(){
+
+    private static String getBaseUrl() {
         return System.getProperty("baseUrl");
     }
-    private static String getApiKey(){
+
+    private static String getApiKey() {
         return System.getProperty("apiKey");
     }
-    private static String getAppId(){
+
+    private static String getAppId() {
         return System.getProperty("appIdParam");
     }
 }
