@@ -10,11 +10,14 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 
 import java.io.File;
 
 import static org.hamcrest.Matchers.is;
 
+@Execution(ExecutionMode.CONCURRENT)
 public abstract class BaseTest {
     protected static ResponseSpecification getResponseSpec(String city) {
         return new ResponseSpecBuilder()
